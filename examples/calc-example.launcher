@@ -1,0 +1,10 @@
+[Plauncher Entry]
+Name=Calculator
+Comment=Calculator example launcher
+Author=Javier Hernández
+Exec=gcalctool
+Icon=accessories-calculator
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Categoria
