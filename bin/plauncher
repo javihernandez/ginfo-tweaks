@@ -14,11 +14,12 @@ gettext.textdomain('plauncher')
 
 # optional Launchpad integration
 # this shouldn't crash if not found as it is simply used for bug reporting
-try:
-    import LaunchpadIntegration
-    launchpad_available = True
-except:
-    launchpad_available = False
+#try:
+#    import LaunchpadIntegration
+#    launchpad_available = True
+#except:
+#    launchpad_available = False
+launchpad_available = False
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
