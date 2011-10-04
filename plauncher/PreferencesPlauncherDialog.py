@@ -3,8 +3,8 @@
 # This file is in the public domain
 ### END LICENSE
 
-from desktopcouch.records.server import CouchDatabase
-from desktopcouch.records.record import Record
+#from desktopcouch.records.server import CouchDatabase
+#from desktopcouch.records.record import Record
 import gtk
 
 from plauncher.helpers import get_builder
@@ -45,7 +45,7 @@ class PreferencesPlauncherDialog(gtk.Dialog):
 
         # Set up couchdb and the preference info.
         self._db_name = "plauncher"
-        self._database = CouchDatabase(self._db_name, create=True)
+        #self._database = CouchDatabase(self._db_name, create=True)
         self._preferences = None
         self._key = None
 
@@ -78,7 +78,8 @@ class PreferencesPlauncherDialog(gtk.Dialog):
 
         if len(results.rows) == 0:
             # No preferences have ever been saved, save them before returning.
-            self._key = self._database.put_record(Record(self._preferences))
+            #self._key = self._database.put_record(Record(self._preferences))
+            print 'TODO: Implement user settings'
         else:
             self._preferences = results.rows[0].value
             del self._preferences['_rev']
