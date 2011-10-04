@@ -1,0 +1,436 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+### BEGIN LICENSE
+# This file is in the public domain
+### END LICENSE
+
+import sys
+import os
+import gtk
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('plauncher')
+
+# optional Launchpad integration
+# this shouldn't crash if not found as it is simply used for bug reporting
+try:
+    import LaunchpadIntegration
+    launchpad_available = True
+except:
+    launchpad_available = False
+
+# Add project root directory (enable symlink, and trunk execution).
+PROJECT_ROOT_DIRECTORY = os.path.abspath(
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
+
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'plauncher'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
+
+from plauncher import (
+    AboutPlauncherDialog, PreferencesPlauncherDialog)
+from plauncher.helpers import get_builder
+
+from plauncher import libplauncher
+
+import pango
+
+PATH = None
+FIXED_CATEGORIES, LAUNCHER_CATEGORIES, CATEGORY_LAUNCHERS, \
+    SYSTEM, USER = range(0,5)
+
+class PlauncherWindow(gtk.Window):
+    __gtype_name__ = "PlauncherWindow"
+    
+    def __new__(cls):
+        """Special static method that's automatically called by Python when 
+        constructing a new instance of this class.
+        
+        Returns a fully instantiated PlauncherWindow object.
+        """
+        builder = get_builder('PlauncherWindow')
+        new_object = builder.get_object("plauncher_window")
+        new_object.finish_initializing(builder)
+
+        return new_object
+
+    def finish_initializing(self, builder):
+        """Called while initializing this instance in __new__
+
+        finish_initalizing should be called after parsing the UI definition
+        and creating a PlauncherWindow object with it in order to finish
+        initializing the start of the new PlauncherWindow instance.
+        
+        Put your initilization code in here and leave __init__ undefined.
+        """
+        # Get a reference to the builder and set up the signals.
+        self.builder = builder
+        self.builder.connect_signals(self)
+
+        global launchpad_available
+        if launchpad_available:
+            # see https://wiki.ubuntu.com/UbuntuDevelopment/..
+            # ..Internationalisation/Coding for more information
+            # about LaunchpadIntegration
+            helpmenu = self.builder.get_object('helpMenu')
+            if helpmenu:
+                LaunchpadIntegration.set_sourcepackagename('plauncher')
+                LaunchpadIntegration.add_items(helpmenu, 0, False, True)
+            else:
+                launchpad_available = False
+
+        # Variables for managing statuses 
+        #
+        #                                 POSSIBLE VALUES
+        #                                 ---------------
+        #
+        self.category_tracker = None    # SYSTEM, USER
+
+        self.tracker = FIXED_CATEGORIES # FIXED_CATEGORIES, LAUNCHER_CATEGORIES,
+                                        # CATEGORY_LAUNCHERS
+
+        self.current_category = ''      # Name of opened category
+
+        # Uncomment the following code to read in preferences at start up.
+        #dlg = PreferencesPlauncherDialog.NewPreferencesPlauncherDialog()
+        #self.preferences = dlg.get_preferences()
+
+        # Code for other initialization actions should be added here.
+
+        # Instace objects form UI
+        self.iconStore = self.builder.get_object('iconStore')
+        self.iconView = self.builder.get_object('iconview1')
+        self.launcherWindowBox = self.builder.get_object('viewport1')
+        self.whereAmI = self.builder.get_object('whereamI_lbl')
+
+        # Starting to initialize some things
+        self.theme = gtk.icon_theme_get_default()
+        self._load_fixed_icons()
+
+        # Retrieve all launchers and fill in to its respective categories
+        if PATH:
+            self.launchers = libplauncher.get_path_launchers(PATH)
+            self.__open_fixed_category()
+        else:
+            self.show_fixed_categories()
+
+            self.systemLaunchers, self.userLaunchers = \
+                            libplauncher.get_launchers()
+
+            self.launchers = self.systemLaunchers + self.userLaunchers
+
+    def show_fixed_categories(self):
+        self.iconStore.clear()
+        self.iconStore.append([self.system_icon, \
+                            '<b>' + _('System Launchers') + '</b>', \
+                            pango.ALIGN_CENTER, 140, pango.WRAP_WORD])
+        self.iconStore.append([self.user_icon,  \
+                            _('<b>User Launchers</b>'), \
+                            pango.ALIGN_CENTER, 140, pango.WRAP_WORD])
+
+    def _load_fixed_icons(self):
+        self.system_icon = self.theme.load_icon('gksu-icon', 68, 0)
+        self.user_icon = self.theme.load_icon('gtk-properties', 68, 0)
+        self.all_icon = self.theme.load_icon('gtk-about', 68, 0)
+
+    def show_launchers(self, launchers):
+        # Clear the model before fill the treeview
+        self.launcherStore.clear()
+        
+        for launcher in launchers:
+            try:
+                icon = self.theme.load_icon(launcher.getIcon(), 68, 0)
+            except:
+                try:
+                    pixbuf_from_file = gtk.gdk.pixbuf_new_from_file_at_size
+                    icon = pixbuf_from_file(launcher.getIcon(), 68, 68)
+                except:
+                    icon = self.theme.load_icon('gksu-icon', 42, 0)
+
+            self.launcherStore.append([icon,
+                    '<b>' + launcher.getName() + '</b>',
+                    '<i>' + launcher.getComment() + '</i>'])
+
+    def __fill_categories(self):
+        """Fill categories with all launchers"""
+
+        sysStore = [x for x in self.launchers if 'System' in x.getCategories()]
+        otherStore = [x for x in self.launchers if not x in sysStore]
+
+        return sysStore, otherStore
+
+    def on_iconview_pressed(self, widget, data=None):
+        if len(widget.get_selected_items()) != 0:
+            selected_icon = widget.get_selected_items()[0][0]
+            icon_name = self.iconStore[selected_icon][1]
+            icon_name = self.__unmarkup(icon_name)
+            if data:
+                if data.type == gtk.gdk._2BUTTON_PRESS:
+                    if self.tracker in [FIXED_CATEGORIES, LAUNCHER_CATEGORIES]:
+                        self._open_category(icon_name)
+                    elif self.tracker == CATEGORY_LAUNCHERS:
+                        self._launch_icon(icon_name)
+                elif data.type == gtk.gdk.BUTTON_PRESS \
+                            and self.tracker == CATEGORY_LAUNCHERS:
+                    self.on_iconview_changed(widget)
+
+    def on_iconview_changed(self, widget, data=None, data2=None):
+        if len(widget.get_selected_items()) != 0 and \
+                self.tracker == CATEGORY_LAUNCHERS:
+            selected_icon = widget.get_selected_items()[0][0]
+            icon_name = self.iconStore[selected_icon][1]
+            icon_name = self.__unmarkup(icon_name)
+            self.launcher_selection_changed(None, None, icon_name)
+
+    def _open_category(self, icon_name):
+        """Category selection changed method"""
+        if self.tracker == FIXED_CATEGORIES:
+            self.__open_fixed_category(icon_name)
+        else:
+            self.current_category = icon_name
+            self.__open_launcher_category(icon_name)
+
+    def __open_fixed_category(self, icon_name=None):
+
+        self.iconStore.clear()
+        categories = []
+
+        if icon_name == _('System Launchers'):
+            categories = [x.getCategories()[0] for x in self.systemLaunchers]
+            self.category_tracker = SYSTEM
+            self.__append_categories(categories)
+            self.__update_whereAmI_lbl(icon_name)
+
+        elif icon_name == _('User Launchers'):
+            categories = [x.getCategories()[0] for x in self.userLaunchers]
+            self.category_tracker = USER
+            self.__append_categories(categories)
+            self.__update_whereAmI_lbl(icon_name)
+
+        else:
+            categories = [x.getCategories()[0] for x in self.launchers]
+            self.__append_categories(categories)
+            self.__update_whereAmI_lbl('Wellcome to plauncher!')
+
+        self.tracker = LAUNCHER_CATEGORIES
+
+    def __update_whereAmI_lbl(self, text):
+        self.whereAmI.set_markup('<big><big><big><b>' \
+                    + text + '</b></big></big></big>')
+
+    def __open_launcher_category(self, icon_name):
+        self.iconStore.clear()
+        launchers = []
+
+        if self.category_tracker == SYSTEM:
+            launchers = [x for x in self.systemLaunchers \
+                        if x.getCategories()[0] == self.current_category]
+        elif self.category_tracker == USER:
+            launchers = [x for x in self.userLaunchers \
+                        if x.getCategories()[0] == self.current_category]
+        else:
+            launchers = [x for x in self.launchers \
+                        if x.getCategories()[0] == self.current_category]
+
+        self.__show_launchers(launchers)
+        self.tracker = CATEGORY_LAUNCHERS
+        self.__update_whereAmI_lbl(self.whereAmI.get_text() + ' : ' + icon_name)
+
+    def __show_launchers(self, launchers):
+        for launcher in launchers:
+            icon = self.__get_launcher_icon(launcher)
+            self.iconStore.append([icon,
+                    '<b>' + launcher.getName() + '</b>', pango.ALIGN_CENTER, \
+                    140, pango.WRAP_WORD])
+
+    def __get_launcher_icon(self, launcher=None):
+        try:
+                icon = self.theme.load_icon(launcher.getIcon(), 68, 0)
+        except:
+            try:
+                pixbuf_from_file = gtk.gdk.pixbuf_new_from_file_at_size
+                icon = pixbuf_from_file(launcher.getIcon(), 68, 68)
+            except:
+                icon = self.all_icon
+
+        return icon
+
+    def __get_category_icon(self, category):
+        if PATH:
+            category_object = libplauncher.get_category_from_path(category, PATH)
+        else:
+            if self.category_tracker == SYSTEM:
+                category_object = libplauncher.get_category_from_path(category, SYSTEM)
+            else:
+                category_object = libplauncher.get_category_from_path(category, USER)
+
+        if category_object:
+            try:                                                            
+                    icon = self.theme.load_icon(category_object.getIcon(), 68, 0)
+            except:
+                try:
+                    pixbuf_from_file = gtk.gdk.pixbuf_new_from_file_at_size
+                    icon = pixbuf_from_file(category_object.getIcon(), 68, 68)
+                except:
+                    icon = self.all_icon
+                                                                            
+            return icon
+
+        
+
+    def __append_categories(self, categories):
+        all_cats = [x for x in categories if categories.count(x) == 1]
+        b = [all_cats.append(x) for x in categories if not x in all_cats]
+
+        for category in all_cats:
+            icon = self.__get_category_icon(category)
+            if not icon: icon = self.all_icon
+            self.iconStore.append([icon,  
+                    '<b>' + category + '</b>', pango.ALIGN_CENTER, \
+                    140, pango.WRAP_WORD])
+
+    def _launch_icon(self, icon_name):
+        if self.category_tracker == SYSTEM:
+            launchers = self.systemLaunchers
+        elif self.category_tracker == USER:
+            launchers = self.userLaunchers
+        else:
+            launchers = self.launchers
+
+        for launcher in launchers:
+            if str(launcher) == icon_name:
+                launcher.launch()
+                break
+
+    def on_goBackBtn_pushed(self, widget, data=None):
+        if self.tracker == LAUNCHER_CATEGORIES and not PATH:
+            self.tracker = FIXED_CATEGORIES
+            self.category_tracker = None
+            self.show_fixed_categories()
+            self.__update_whereAmI_lbl('Wellcome to plauncher!')
+
+        elif self.tracker == CATEGORY_LAUNCHERS or PATH:
+            if self.category_tracker == SYSTEM:
+                category = _('System Launchers')
+            elif self.category_tracker == USER:
+                category = _('User Launchers')
+            else:
+                category = None
+
+            for child in self.launcherWindowBox.get_children():
+                self.launcherWindowBox.remove(child)
+
+            self.__open_fixed_category(category)
+
+    def launcher_selection_changed(self, widget, data=None, active=None):
+        """Launcher selection changed method"""
+
+        if not active:
+            self.selection = widget.get_selection()
+            launcher_store, selected_rows = self.selection.get_selected_rows()
+            if not selected_rows:
+                return
+
+            for row in selected_rows:
+                active = launcher_store[row][1]
+
+        for launcher in self.launchers:
+            if str(launcher) in active:
+                break
+
+        self.show_launcher_details(launcher)
+
+        # Execute the launcher if double click
+        if data and data.type == gtk.gdk._2BUTTON_PRESS:
+            launcher.launch()
+
+    def show_launcher_details(self, launcher):
+        """Show selected launcher in TextView"""
+
+        for child in self.launcherWindowBox.get_children():
+            self.launcherWindowBox.remove(child)
+        
+        launcher_entry = LauncherEntryUI(launcher)
+        self.launcherWindowBox.add(launcher_entry.new_object)
+
+    def test_drag_drop(self, widget, data=None):
+        print 'dragged'
+ 
+
+    def about(self, widget, data=None):
+        """Display the about box for plauncher"""
+        about = AboutPlauncherDialog.AboutPlauncherDialog()
+        response = about.run()
+        about.destroy()
+
+    def preferences(self, widget, data=None):
+        """Display the preferences window for plauncher."""
+        prefs = PreferencesPlauncherDialog.PreferencesPlauncherDialog()
+        response = prefs.run()
+        if response == gtk.RESPONSE_OK:
+            # Make any updates based on changed preferences here.
+            pass
+        prefs.destroy()
+
+    def quit(self, widget, data=None):
+        """Signal handler for closing the PlauncherWindow."""
+        self.destroy()
+
+    def on_destroy(self, widget, data=None):
+        """Called when the PlauncherWindow is closed."""
+        # Clean up code for saving application state should be added here.
+        gtk.main_quit()
+
+    def __unmarkup(self, string):
+        return string[3:][:-4]
+
+class LauncherEntryUI(object):
+    """GtkBuilder Object for showing the launchers"""
+
+    def __init__(self, launcher):
+        self.builder = get_builder('LauncherEntry')
+        self.builder.connect_signals(self)
+        self.new_object = self.builder.get_object("table1")
+
+        self.name = self.builder.get_object('name_lbl')
+        self.description = self.builder.get_object('description_lbl')
+        self.author = self.builder.get_object('author_lbl')
+
+        self.launcher = launcher
+
+        self.name.set_markup('<big><b>%s</b></big>' % self.launcher.getName())
+        self.description.set_markup('<big>%s</big>' % self.launcher.getComment())
+        self.author.set_markup('<big>%s</big>' % self.launcher.getAuthor())
+
+
+    def pushed(self, widget):
+        self.launcher.launch()
+
+
+
+if __name__ == "__main__":
+    # Support for command line options.
+    import logging
+    import optparse
+    parser = optparse.OptionParser(version="%prog %ver")
+    parser.add_option(
+        "-v", "--verbose", action="store_true", dest="verbose",
+        help=_("Show debug messages"))
+    (options, args) = parser.parse_args()
+
+    # Check for path
+    for arg in args:
+        if '.' in arg or '/' in arg and os.path.exists(arg):
+            PATH = arg
+
+    # Set the logging level to show debug messages.
+    if options.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+        logging.debug('logging enabled')
+
+    # Run the application.
+    window = PlauncherWindow()
+    window.show()
+    gtk.main()

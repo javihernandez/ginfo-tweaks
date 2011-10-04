@@ -1,0 +1,9 @@
+<glade-catalog name="preferences_plauncher_dialog" domain="glade-3" 
+               depends="gtk+" version="1.0">
+  <glade-widget-classes>
+    <glade-widget-class title="Plauncher Preferences Dialog" name="PreferencesPlauncherDialog" 
+                        generic-name="PreferencePlauncherDialog" parent="GtkDialog"
+                        icon-name="widget-gtk-dialog"/>
+  </glade-widget-classes>
+
+</glade-catalog>

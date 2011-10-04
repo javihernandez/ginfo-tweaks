@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Plauncher
+_Comment=A customizable Launcher Panel
+Categories=GNOME;Utility;
+Exec=plauncher
+Icon=plauncher
+Terminal=false
+Type=Application

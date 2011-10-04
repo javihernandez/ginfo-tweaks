@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-requires about_plauncher_dialog 1.0 -->
+  <!-- interface-naming-policy project-wide -->
+  <object class="AboutPlauncherDialog" id="about_plauncher_dialog">
+    <property name="border_width">5</property>
+    <property name="icon">../media/icon.png</property>
+    <property name="type_hint">normal</property>
+    <property name="has_separator">False</property>
+    <property name="program_name">Plauncher</property>
+    <property name="version">0.2</property>
+    <property name="copyright">Junta de Andalucia &lt;packmaster@guadalinex.org&gt;</property>
+    <property name="comments" translatable="yes">Plauncher is a desktop entry based application launcher.</property>
+    <property name="website_label" translatable="yes">http://launchpad.net/plauncher</property>
+    <property name="license" translatable="yes"># Copyright (C) 2010 Junta de Andaluc&#xED;a &lt;packmaster@guadalinex.org&gt;
+# This program is free software: you can redistribute it and/or modify it 
+# under the terms of the GNU General Public License version 3, as published 
+# by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranties of 
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+# PURPOSE.  See the GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License along 
+# with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</property>
+    <property name="authors">Javier Hern&#xE1;ndez Ant&#xFA;nez &lt;jhernandez@emergya.es	&gt;</property>
+    <property name="logo">../media/logo.png</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
