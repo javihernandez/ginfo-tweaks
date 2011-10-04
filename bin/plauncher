@@ -131,7 +131,7 @@ class PlauncherWindow(gtk.Window):
                             pango.ALIGN_CENTER, 140, pango.WRAP_WORD])
 
     def _load_fixed_icons(self):
-        self.system_icon = self.theme.load_icon('gksu-icon', 68, 0)
+        self.system_icon = self.theme.load_icon('gtk-dialog-warning', 68, 0)
         self.user_icon = self.theme.load_icon('gtk-properties', 68, 0)
         self.all_icon = self.theme.load_icon('gtk-about', 68, 0)
 
