@@ -1,0 +1,27 @@
+AC_INIT(Plauncher, 0.2.1pre, jhernandez@emergya.es, plauncher)
+dnl == AC_CONFIG_SRCDIR(src/accerciser.in)
+AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE([enable])
+
+dnl == check for python ==
+AM_PATH_PYTHON(2.4)
+
+dnl == i18n ==
+GETTEXT_PACKAGE=plauncher
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The gettext package])
+AM_GLIB_GNU_GETTEXT
+
+dnl == intltool check ==
+IT_PROG_INTLTOOL([0.35.0])
+
+dnl == generate makefiles ==
+AC_OUTPUT([
+Makefile 
+bin/Makefile
+plauncher/Makefile
+data/Makefile
+data/ui/Makefile
+data/media/Makefile
+po/Makefile.in
+])

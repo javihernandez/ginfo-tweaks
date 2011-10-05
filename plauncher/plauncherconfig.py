@@ -14,9 +14,12 @@ __all__ = [
     'get_data_path',
     ]
 
+import sys, os
+
 # Where your project will look for your data (for instance, images and ui
 # files). By default, this is ../data, relative your trunk layout
-__plauncher_data_directory__ = '../data/'
+__plauncher_data_directory__ = os.path.join(sys.prefix, 'share' , \
+        'plauncher','data')
 __license__ = ''
 
 import os

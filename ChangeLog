@@ -1,0 +1,59 @@
+commit c68930820d062ec808539c215ac055357e8f00b9
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 02:38:35 2011 +0200
+
+    Removed quickly default branding images
+
+commit 2b0a42e5724f6696c8b4f619aa3f1a2b1890a0e2
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:52:48 2011 +0200
+
+    Adding a TODO file
+
+commit f7e5aef31cef394e8bb54719306ba6f82bb8f422
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:44:29 2011 +0200
+
+    Added launcher and category file examples
+
+commit b2118eade7d38594661289e64f1e525beabae1a9
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:44:06 2011 +0200
+
+    Added some information in README file
+
+commit 49c587f369312cdb2ddc9ca7838b51ddbf31a454
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:34:35 2011 +0200
+
+    Disable LaunchpadIntegration
+
+commit b247af8e2e59154b07a04148e49310cda60a73e1
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:31:00 2011 +0200
+
+    rm the .pot file
+
+commit 51a57c50b4f39329a1a45e617e8a8c8e77baacdf
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:25:52 2011 +0200
+
+    Disabling desktopcouch support for to store user preferences
+
+commit b61eb82ef8322c62d8eac460c294b3809ffa772d
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:24:59 2011 +0200
+
+    Change the default icon for system category
+
+commit b12afe5cf78fd28aca2ceffcb8baf0fa131b32a0
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 01:20:04 2011 +0200
+
+    Importing from lp:plauncher
+
+commit 162f1688c0598f9e17ecf6a4658c5c203f63c3cc
+Author: Javier Hernández <jhernandez@emergya.es>
+Date:   Wed Oct 5 00:59:45 2011 +0200
+
+    Added README
