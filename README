@@ -1,7 +1,51 @@
 ginfo-tweaks
-------------
+============
 
-ginfo-tweaks is a from plauncher (http://launchpad.net/plauncher).
-ginfo-tweaks is a personal initiative as a telecentre solution app.
+About ginfo-tweaks
+------------------
+Ginfo-tweaks is a fork of plauncher (http://launchpad.net/plauncher).
+Ginfo-tweaks is a personal initiative as a telecentre solution application.
+
+Ginfo-tweaks is a panel launcher that provides an easy user interface for 
+running custom scripts from a centralized application in a telecentre
+environment. Mostly focused on making the life better for the distribution
+maintainers, the technical support team and of course, the users on the 
+telecentres.
+
+Launchers and categories are described in the Freedesktop's "Desktop Entry 
+Specification" standard, and custom icons for lanchers and categories are 
+supported. Launchers can be runned with priveleges or without them, so users
+can create their own launchers and share them with other people.
+
+
+Requirements
+------------
+• Python >= 2.6
+• Python bindings for:
+  • Gtk, GObject, GLib
+  • Gettext
+  • Xdg
+  • Pango
+
+
+Installing ginfo-tweaks
+-----------------------
+If you got the tarball,
+
+./configure
+make
+sudo make install
+
+If you got the code from git:
+
+./autogen.sh
+make
+sudo make install
+
+
+Contributing to ginfo-tweaks
+----------------------------
+Ginfo-tweaks is in a early development status, so if you're involved with
+telecentre solutions, maybe you have some great ideas for making it better.
 
 
