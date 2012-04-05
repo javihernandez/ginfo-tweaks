@@ -5,4 +5,4 @@ plauncherdata_DATA = \
         PlauncherWindow.ui \
         PreferencesPlauncherDialog.ui
 
-EXTRA_DIST = $(plauncherdatadir_DATA)
+EXTRA_DIST = $(plauncherdata_DATA)

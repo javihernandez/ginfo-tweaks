@@ -1,5 +1,4 @@
-SUBDIRS = bin plauncher data
-
+SUBDIRS = bin plauncher data po  
 INTLTOOL = 			\
 	intltool-extract.in 	\
 	intltool-merge.in 	\
@@ -13,12 +12,17 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 EXTRA_DIST =  \
 	$(desktop_in_files) \
 	$(desktop_DATA) \
+	gnome-doc-utils.make \
 	$(INTLTOOL) 
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+DISTCHECK_CONFIGURE_FLAGS = \
+        --disable-scrollkeeper \
+	--enable-pydoc
+
 DISTCLEANFILES = \
 	$(desktop_DATA) \
 	intltool-extract \
 	intltool-merge \
-	intltool-update	
+	intltool-update	\
+	gnome-doc-utils.make
 

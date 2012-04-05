@@ -1,6 +1,6 @@
 [encoding: UTF-8]
-bin/plauncher
 plauncher.desktop.in
+bin/plauncher
 [type: gettext/glade]data/ui/AboutPlauncherDialog.ui
 [type: gettext/glade]data/ui/PlauncherWindow.ui
 [type: gettext/glade]data/ui/LauncherEntry.ui

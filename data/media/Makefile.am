@@ -3,4 +3,4 @@ plauncherdata_DATA = \
         icon.png \
         logo.png
 
-EXTRA_DIST = $(plauncherdatadir_DATA)
+EXTRA_DIST = $(plauncherdata_DATA)

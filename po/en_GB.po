@@ -1,0 +1,103 @@
+# en_GB Translations
+# Copyright (C) 2012
+# This file is distributed under the same license as the ginfo-tweaks package.
+# Javier Hernández <jhernandez@emergya.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plauncher\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-30 23:22+0200\n"
+"PO-Revision-Date: 2012-03-30 23:22+0200\n"
+"Last-Translator: Javier Hernández <jhernandez@emergya.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../bin/plauncher:421
+msgid "Show debug messages"
+msgstr "Show debug messages"
+
+#: ../plauncher.desktop.in.h:1
+msgid "A customizable Launcher Panel"
+msgstr "A customizable Launcher Panel"
+
+#: ../plauncher.desktop.in.h:2 ../data/ui/PlauncherWindow.ui.h:3
+msgid "Plauncher"
+msgstr "Plauncher"
+
+#: ../data/ui/AboutPlauncherDialog.ui.h:1
+msgid ""
+"# Copyright (C) 2010 Junta de Andaluc&#xED;a <packmaster@guadalinex.org>\n"
+"# This program is free software: you can redistribute it and/or modify it \n"
+"# under the terms of the GNU General Public License version 3, as "
+"published \n"
+"# by the Free Software Foundation.\n"
+"# \n"
+"# This program is distributed in the hope that it will be useful, but \n"
+"# WITHOUT ANY WARRANTY; without even the implied warranties of \n"
+"# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR \n"
+"# PURPOSE.  See the GNU General Public License for more details.\n"
+"# \n"
+"# You should have received a copy of the GNU General Public License along \n"
+"# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+"# Copyright (C) 2010 Junta de Andaluc&#xED;a <packmaster@guadalinex.org>\n"
+"# This program is free software: you can redistribute it and/or modify it \n"
+"# under the terms of the GNU General Public License version 3, as "
+"published \n"
+"# by the Free Software Foundation.\n"
+"# \n"
+"# This program is distributed in the hope that it will be useful, but \n"
+"# WITHOUT ANY WARRANTY; without even the implied warranties of \n"
+"# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR \n"
+"# PURPOSE.  See the GNU General Public License for more details.\n"
+"# \n"
+"# You should have received a copy of the GNU General Public License along \n"
+"# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+
+#: ../data/ui/AboutPlauncherDialog.ui.h:14
+msgid "Plauncher is a desktop entry based application launcher."
+msgstr "Plauncher is a desktop entry based application launcher."
+
+#: ../data/ui/AboutPlauncherDialog.ui.h:15
+msgid "http://launchpad.net/plauncher"
+msgstr "http://launchpad.net/plauncher"
+
+#: ../data/ui/PlauncherWindow.ui.h:1
+msgid "<big><big><big><b>Wellcome to plauncher!</b></big></big></big>"
+msgstr "<big><big><big><b>Wellcome to plauncher!</b></big></big></big>"
+
+#: ../data/ui/PlauncherWindow.ui.h:2
+msgid "Atr&#xE1;s"
+msgstr "Atr&#xE1;s"
+
+#: ../data/ui/PlauncherWindow.ui.h:4
+msgid "_Edit"
+msgstr "_Edit"
+
+#: ../data/ui/PlauncherWindow.ui.h:5
+msgid "_File"
+msgstr "_File"
+
+#: ../data/ui/PlauncherWindow.ui.h:6
+msgid "_Help"
+msgstr "_Help"
+
+#: ../data/ui/PlauncherWindow.ui.h:7
+msgid "_View"
+msgstr "_View"
+
+#: ../data/ui/LauncherEntry.ui.h:1
+msgid "<big><b><u>Author:</u></b></big>"
+msgstr "<big><b><u>Author:</u></b></big>"
+
+#: ../data/ui/LauncherEntry.ui.h:2
+msgid "<big><b><u>Description:</u></b></big>"
+msgstr "<big><b><u>Description:</u></b></big>"
+
+#: ../data/ui/LauncherEntry.ui.h:3
+msgid "<big><b><u>Name:</u></b></big>"
+msgstr "<big><b><u>Name:</u></b></big>"
