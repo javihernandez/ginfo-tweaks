@@ -18,7 +18,7 @@ import sys, os
 
 # Where your project will look for your data (for instance, images and ui
 # files). By default, this is ../data, relative your trunk layout
-__plauncher_data_directory__ = os.path.join(sys.prefix, 'share' , \
+__plauncher_data_directory__ = os.path.join('@prefix@', 'share' , \
         'plauncher','data')
 __license__ = ''
 
@@ -52,7 +52,7 @@ def get_data_path():
 
     # Get pathname absolute or relative.
     path = os.path.join(
-        os.path.dirname(__file__), __plauncher_data_directory__)
+        os.path.dirname('@prefix@'), __plauncher_data_directory__)
 
     abs_data_path = os.path.abspath(path)
     if not os.path.exists(abs_data_path):
