@@ -10,7 +10,7 @@ import gtk
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('plauncher')
+gettext.textdomain('ginfotweaks')
 
 # optional Launchpad integration
 # this shouldn't crash if not found as it is simply used for bug reporting
@@ -25,16 +25,16 @@ launchpad_available = False
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 
-if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'plauncher'))
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'ginfotweaks'))
     and PROJECT_ROOT_DIRECTORY not in sys.path):
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-from plauncher import (
-    AboutPlauncherDialog, PreferencesPlauncherDialog)
-from plauncher.helpers import get_builder
+from ginfotweaks import (
+    AboutGinfoTweaksDialog, PreferencesGinfoTweaksDialog)
+from ginfotweaks.helpers import get_builder
 
-from plauncher import libplauncher
+from ginfotweaks import libginfotweaks
 
 import pango
 
@@ -42,17 +42,17 @@ PATH = None
 FIXED_CATEGORIES, LAUNCHER_CATEGORIES, CATEGORY_LAUNCHERS, \
     SYSTEM, USER = range(0,5)
 
-class PlauncherWindow(gtk.Window):
-    __gtype_name__ = "PlauncherWindow"
+class GinfoTweaksWindow(gtk.Window):
+    __gtype_name__ = "GinfoTweaksWindow"
     
     def __new__(cls):
         """Special static method that's automatically called by Python when 
         constructing a new instance of this class.
         
-        Returns a fully instantiated PlauncherWindow object.
+        Returns a fully instantiated GinfoTweaksWindow object.
         """
-        builder = get_builder('PlauncherWindow')
-        new_object = builder.get_object("plauncher_window")
+        builder = get_builder('GinfoTweaksWindow')
+        new_object = builder.get_object("ginfotweaks_window")
         new_object.finish_initializing(builder)
 
         return new_object
@@ -61,8 +61,8 @@ class PlauncherWindow(gtk.Window):
         """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the UI definition
-        and creating a PlauncherWindow object with it in order to finish
-        initializing the start of the new PlauncherWindow instance.
+        and creating a GinfoTweaksWindow object with it in order to finish
+        initializing the start of the new GinfoTweaksWindow instance.
         
         Put your initilization code in here and leave __init__ undefined.
         """
@@ -77,7 +77,7 @@ class PlauncherWindow(gtk.Window):
             # about LaunchpadIntegration
             helpmenu = self.builder.get_object('helpMenu')
             if helpmenu:
-                LaunchpadIntegration.set_sourcepackagename('plauncher')
+                LaunchpadIntegration.set_sourcepackagename('ginfotweaks')
                 LaunchpadIntegration.add_items(helpmenu, 0, False, True)
             else:
                 launchpad_available = False
@@ -95,7 +95,7 @@ class PlauncherWindow(gtk.Window):
         self.current_category = ''      # Name of opened category
 
         # Uncomment the following code to read in preferences at start up.
-        #dlg = PreferencesPlauncherDialog.NewPreferencesPlauncherDialog()
+        #dlg = PreferencesGinfoTweaksDialog.NewPreferencesGinfoTweaksDialog()
         #self.preferences = dlg.get_preferences()
 
         # Code for other initialization actions should be added here.
@@ -112,13 +112,13 @@ class PlauncherWindow(gtk.Window):
 
         # Retrieve all launchers and fill in to its respective categories
         if PATH:
-            self.launchers = libplauncher.get_path_launchers(PATH)
+            self.launchers = libginfotweaks.get_path_launchers(PATH)
             self.__open_fixed_category()
         else:
             self.show_fixed_categories()
 
             self.systemLaunchers, self.userLaunchers = \
-                            libplauncher.get_launchers()
+                            libginfotweaks.get_launchers()
 
             self.launchers = self.systemLaunchers + self.userLaunchers
 
@@ -213,7 +213,7 @@ class PlauncherWindow(gtk.Window):
         else:
             categories = [x.getCategories()[0] for x in self.launchers]
             self.__append_categories(categories)
-            self.__update_whereAmI_lbl('Wellcome to plauncher!')
+            self.__update_whereAmI_lbl('Wellcome to ginfotweaks!')
 
         self.tracker = LAUNCHER_CATEGORIES
 
@@ -260,12 +260,12 @@ class PlauncherWindow(gtk.Window):
 
     def __get_category_icon(self, category):
         if PATH:
-            category_object = libplauncher.get_category_from_path(category, PATH)
+            category_object = libginfotweaks.get_category_from_path(category, PATH)
         else:
             if self.category_tracker == SYSTEM:
-                category_object = libplauncher.get_category_from_path(category, SYSTEM)
+                category_object = libginfotweaks.get_category_from_path(category, SYSTEM)
             else:
-                category_object = libplauncher.get_category_from_path(category, USER)
+                category_object = libginfotweaks.get_category_from_path(category, USER)
 
         if category_object:
             try:                                                            
@@ -310,7 +310,7 @@ class PlauncherWindow(gtk.Window):
             self.tracker = FIXED_CATEGORIES
             self.category_tracker = None
             self.show_fixed_categories()
-            self.__update_whereAmI_lbl('Wellcome to plauncher!')
+            self.__update_whereAmI_lbl('Wellcome to ginfotweaks!')
 
         elif self.tracker == CATEGORY_LAUNCHERS or PATH:
             if self.category_tracker == SYSTEM:
@@ -361,14 +361,14 @@ class PlauncherWindow(gtk.Window):
  
 
     def about(self, widget, data=None):
-        """Display the about box for plauncher"""
-        about = AboutPlauncherDialog.AboutPlauncherDialog()
+        """Display the about box for ginfotweaks"""
+        about = AboutGinfoTweaksDialog.AboutGinfoTweaksDialog()
         response = about.run()
         about.destroy()
 
     def preferences(self, widget, data=None):
-        """Display the preferences window for plauncher."""
-        prefs = PreferencesPlauncherDialog.PreferencesPlauncherDialog()
+        """Display the preferences window for ginfotweaks."""
+        prefs = PreferencesGinfoTweaksDialog.PreferencesGinfoTweaksDialog()
         response = prefs.run()
         if response == gtk.RESPONSE_OK:
             # Make any updates based on changed preferences here.
@@ -376,11 +376,11 @@ class PlauncherWindow(gtk.Window):
         prefs.destroy()
 
     def quit(self, widget, data=None):
-        """Signal handler for closing the PlauncherWindow."""
+        """Signal handler for closing the GinfoTweaksWindow."""
         self.destroy()
 
     def on_destroy(self, widget, data=None):
-        """Called when the PlauncherWindow is closed."""
+        """Called when the GinfoTweaksWindow is closed."""
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
@@ -432,6 +432,6 @@ if __name__ == "__main__":
         logging.debug('logging enabled')
 
     # Run the application.
-    window = PlauncherWindow()
+    window = GinfoTweaksWindow()
     window.show()
     gtk.main()

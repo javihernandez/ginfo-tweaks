@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: plauncher\n"
+"Project-Id-Version: ginfotweaks\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-30 23:22+0200\n"
 "PO-Revision-Date: 2012-03-30 23:22+0200\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../bin/plauncher:421
+#: ../bin/ginfotweaks:421
 msgid "Show debug messages"
 msgstr "Show debug messages"
 
-#: ../plauncher.desktop.in.h:1
+#: ../ginfotweaks.desktop.in.h:1
 msgid "A customizable Launcher Panel"
 msgstr "A customizable Launcher Panel"
 
-#: ../plauncher.desktop.in.h:2 ../data/ui/PlauncherWindow.ui.h:3
-msgid "Plauncher"
-msgstr "Plauncher"
+#: ../ginfotweaks.desktop.in.h:2 ../data/ui/GinfoTweaksWindow.ui.h:3
+msgid "GinfoTweaks"
+msgstr "GinfoTweaks"
 
-#: ../data/ui/AboutPlauncherDialog.ui.h:1
+#: ../data/ui/AboutGinfoTweaksDialog.ui.h:1
 msgid ""
 "# Copyright (C) 2010 Junta de Andaluc&#xED;a <packmaster@guadalinex.org>\n"
 "# This program is free software: you can redistribute it and/or modify it \n"
@@ -58,35 +58,35 @@ msgstr ""
 "# You should have received a copy of the GNU General Public License along \n"
 "# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 
-#: ../data/ui/AboutPlauncherDialog.ui.h:14
-msgid "Plauncher is a desktop entry based application launcher."
-msgstr "Plauncher is a desktop entry based application launcher."
+#: ../data/ui/AboutGinfoTweaksDialog.ui.h:14
+msgid "GinfoTweaks is a desktop entry based application launcher."
+msgstr "GinfoTweaks is a desktop entry based application launcher."
 
-#: ../data/ui/AboutPlauncherDialog.ui.h:15
-msgid "http://launchpad.net/plauncher"
-msgstr "http://launchpad.net/plauncher"
+#: ../data/ui/AboutGinfoTweaksDialog.ui.h:15
+msgid "http://launchpad.net/ginfotweaks"
+msgstr "http://launchpad.net/ginfotweaks"
 
-#: ../data/ui/PlauncherWindow.ui.h:1
-msgid "<big><big><big><b>Wellcome to plauncher!</b></big></big></big>"
-msgstr "<big><big><big><b>Wellcome to plauncher!</b></big></big></big>"
+#: ../data/ui/GinfoTweaksWindow.ui.h:1
+msgid "<big><big><big><b>Wellcome to ginfotweaks!</b></big></big></big>"
+msgstr "<big><big><big><b>Wellcome to ginfotweaks!</b></big></big></big>"
 
-#: ../data/ui/PlauncherWindow.ui.h:2
+#: ../data/ui/GinfoTweaksWindow.ui.h:2
 msgid "Atr&#xE1;s"
 msgstr "Atr&#xE1;s"
 
-#: ../data/ui/PlauncherWindow.ui.h:4
+#: ../data/ui/GinfoTweaksWindow.ui.h:4
 msgid "_Edit"
 msgstr "_Edit"
 
-#: ../data/ui/PlauncherWindow.ui.h:5
+#: ../data/ui/GinfoTweaksWindow.ui.h:5
 msgid "_File"
 msgstr "_File"
 
-#: ../data/ui/PlauncherWindow.ui.h:6
+#: ../data/ui/GinfoTweaksWindow.ui.h:6
 msgid "_Help"
 msgstr "_Help"
 
-#: ../data/ui/PlauncherWindow.ui.h:7
+#: ../data/ui/GinfoTweaksWindow.ui.h:7
 msgid "_View"
 msgstr "_View"
 

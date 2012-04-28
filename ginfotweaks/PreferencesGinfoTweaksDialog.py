@@ -7,24 +7,24 @@
 #from desktopcouch.records.record import Record
 import gtk
 
-from plauncher.helpers import get_builder
+from ginfotweaks.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('plauncher')
+gettext.textdomain('ginfotweaks')
 
-class PreferencesPlauncherDialog(gtk.Dialog):
-    __gtype_name__ = "PreferencesPlauncherDialog"
+class PreferencesGinfoTweaksDialog(gtk.Dialog):
+    __gtype_name__ = "PreferencesGinfoTweaksDialog"
     preferences = {}
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
         constructing a new instance of this class.
         
-        Returns a fully instantiated PreferencesPlauncherDialog object.
+        Returns a fully instantiated PreferencesGinfoTweaksDialog object.
         """
-        builder = get_builder('PreferencesPlauncherDialog')
-        new_object = builder.get_object("preferences_plauncher_dialog")
+        builder = get_builder('PreferencesGinfoTweaksDialog')
+        new_object = builder.get_object("preferences_ginfotweaks_dialog")
         new_object.finish_initializing(builder)
         return new_object
 
@@ -32,8 +32,8 @@ class PreferencesPlauncherDialog(gtk.Dialog):
         """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the ui definition
-        and creating a PreferencesPlauncherDialog object with it in order to
-        finish initializing the start of the new PerferencesPlauncherDialog
+        and creating a PreferencesGinfoTweaksDialog object with it in order to
+        finish initializing the start of the new PerferencesGinfoTweaksDialog
         instance.
         
         Put your initialization code in here and leave __init__ undefined.
@@ -44,20 +44,20 @@ class PreferencesPlauncherDialog(gtk.Dialog):
         self.builder.connect_signals(self)
 
         # Set up couchdb and the preference info.
-        self._db_name = "plauncher"
+        self._db_name = "ginfotweaks"
         #self._database = CouchDatabase(self._db_name, create=True)
         self._preferences = None
         self._key = None
 
         # Set the record type and then initalize the preferences.
         self._record_type = (
-            "http://wiki.ubuntu.com/Quickly/RecordTypes/Plauncher/"
+            "http://wiki.ubuntu.com/Quickly/RecordTypes/GinfoTweaks/"
             "Preferences")
         self._preferences = self.get_preferences()
         # TODO: code for other initialization actions should be added here
 
     def get_preferences(self):
-        """Return a dict of preferences for plauncher.
+        """Return a dict of preferences for ginfotweaks.
 
         Creates a couchdb record if necessary.
         """
@@ -107,6 +107,6 @@ class PreferencesPlauncherDialog(gtk.Dialog):
         pass
 
 if __name__ == "__main__":
-    dialog = PreferencesPlauncherDialog()
+    dialog = PreferencesGinfoTweaksDialog()
     dialog.show()
     gtk.main()

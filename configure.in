@@ -1,4 +1,4 @@
-AC_INIT(Plauncher, 0.3, jhernandez@emergya.com, plauncher)
+AC_INIT(GinfoTweaks, 0.3, jhernandez@emergya.com, ginfo-tweaks)
 dnl == AC_CONFIG_SRCDIR(src/accerciser.in)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE([enable])
@@ -12,7 +12,7 @@ dnl == intltool check ==
 IT_PROG_INTLTOOL([0.35.0])
 
 dnl == i18n ==
-GETTEXT_PACKAGE=plauncher
+GETTEXT_PACKAGE=ginfotweaks
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The gettext package])
 AM_GLIB_GNU_GETTEXT
@@ -25,8 +25,8 @@ AC_OUTPUT([
 Makefile 
 po/Makefile.in
 bin/Makefile
-plauncher/plauncherconfig.py
-plauncher/Makefile
+ginfotweaks/ginfotweaksconfig.py
+ginfotweaks/Makefile
 data/Makefile
 data/ui/Makefile
 data/media/Makefile

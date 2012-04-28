@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
-  <!-- interface-requires plauncher_window 1.0 -->
+  <!-- interface-requires ginfotweaks_window 1.0 -->
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path ../media -->
   <object class="GtkListStore" id="categoryStore">
@@ -22,11 +22,11 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="PlauncherWindow" id="plauncher_window">
+  <object class="GinfoTweaksWindow" id="ginfotweaks_window">
     <property name="width_request">530</property>
     <property name="height_request">290</property>
     <property name="no_show_all">True</property>
-    <property name="title" translatable="yes">Plauncher</property>
+    <property name="title" translatable="yes">GinfoTweaks</property>
     <property name="window_position">center-always</property>
     <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>
@@ -242,7 +242,7 @@
                       <object class="GtkLabel" id="whereamI_lbl">
                         <property name="visible">True</property>
                         <property name="xpad">5</property>
-                        <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;Wellcome to plauncher!&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
+                        <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;Wellcome to ginfotweaks!&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
                         <property name="use_markup">True</property>
                       </object>
                       <packing>

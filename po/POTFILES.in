@@ -1,7 +1,7 @@
 [encoding: UTF-8]
-plauncher.desktop.in
-bin/plauncher
-[type: gettext/glade]data/ui/AboutPlauncherDialog.ui
-[type: gettext/glade]data/ui/PlauncherWindow.ui
+ginfotweaks.desktop.in
+bin/ginfo-tweaks
+[type: gettext/glade]data/ui/AboutGinfoTweaksDialog.ui
+[type: gettext/glade]data/ui/GinfoTweaksWindow.ui
 [type: gettext/glade]data/ui/LauncherEntry.ui
-[type: gettext/glade]data/ui/PlauncherWindow.ui
+[type: gettext/glade]data/ui/GinfoTweaksWindow.ui

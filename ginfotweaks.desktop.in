@@ -1,8 +1,8 @@
 [Desktop Entry]
-_Name=Plauncher
+_Name=GinfoTweaks
 _Comment=A customizable Launcher Panel
 Categories=GNOME;Utility;
-Exec=plauncher
-Icon=plauncher
+Exec=ginfotweaks
+Icon=ginfotweaks
 Terminal=false
 Type=Application

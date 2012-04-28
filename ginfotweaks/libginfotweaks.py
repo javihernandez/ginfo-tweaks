@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""plauncher library for manipulating launchers"""
+"""ginfotweaks library for manipulating launchers"""
 
 import os
 from xdg.DesktopEntry import DesktopEntry
@@ -10,12 +10,12 @@ from subprocess import Popen, list2cmdline
 
 SYSTEM, USER = range(3,5)
 
-allowedGroups = ["Desktop Entry", "KDE Desktop Entry", "Plauncher Entry", "Plauncher Category"]
+allowedGroups = ["Desktop Entry", "KDE Desktop Entry", "GinfoTweaks Entry", "GinfoTweaks Category"]
 
 class Launcher(DesktopEntry):
     """Launcher class"""
 
-    defaultGroup = 'Plauncher Entry'
+    defaultGroup = 'GinfoTweaks Entry'
 
     def parse(self, file):
         IniFile.parse(self, file, allowedGroups)
@@ -37,16 +37,16 @@ class Launcher(DesktopEntry):
 class Category(DesktopEntry):
     """Category class"""
 
-    defaultGroup = 'Plauncher Category'
+    defaultGroup = 'GinfoTweaks Category'
 
     def parse(self, file):
         IniFile.parse(self, file, allowedGroups)
 
 
-# plauncher common utilities
+# ginfotweaks common utilities
 
-SYS_BASEDIR = os.path.join('/usr/lib', 'plauncher', 'launchers')
-USER_BASEDIR = os.path.join(xdg_data_home, 'plauncher', 'launchers')
+SYS_BASEDIR = os.path.join('/usr/lib', 'ginfotweaks', 'launchers')
+USER_BASEDIR = os.path.join(xdg_data_home, 'ginfotweaks', 'launchers')
 
 def get_launchers():
     """Retrieve all system and user launchers"""

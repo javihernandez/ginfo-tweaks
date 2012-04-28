@@ -12,11 +12,11 @@ __all__ = [
 import os
 import gtk
 
-from plauncher.plauncherconfig import get_data_file
+from ginfotweaks.ginfotweaksconfig import get_data_file
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('plauncher')
+gettext.textdomain('ginfotweaks')
 
 def get_builder(builder_file_name):
     """Return a fully-instantiated gtk.Builder instance from specified ui 
@@ -31,6 +31,6 @@ def get_builder(builder_file_name):
         ui_filename = None
 
     builder = gtk.Builder()
-    builder.set_translation_domain('plauncher')
+    builder.set_translation_domain('ginfotweaks')
     builder.add_from_file(ui_filename)
     return builder

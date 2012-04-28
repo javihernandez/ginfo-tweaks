@@ -1,6 +1,6 @@
-plauncherdatadir = $(datadir)/$(PACKAGE)/data/media
-plauncherdata_DATA = \
+ginfotweaksdatadir = $(datadir)/$(PACKAGE)/data/media
+ginfotweaksdata_DATA = \
         icon.png \
         logo.png
 
-EXTRA_DIST = $(plauncherdata_DATA)
+EXTRA_DIST = $(ginfotweaksdata_DATA)

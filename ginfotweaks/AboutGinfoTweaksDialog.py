@@ -5,23 +5,23 @@
 
 import gtk
 
-from plauncher.helpers import get_builder
+from ginfotweaks.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('plauncher')
+gettext.textdomain('ginfotweaks')
 
-class AboutPlauncherDialog(gtk.AboutDialog):
-    __gtype_name__ = "AboutPlauncherDialog"
+class AboutGinfoTweaksDialog(gtk.AboutDialog):
+    __gtype_name__ = "AboutGinfoTweaksDialog"
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
         constructing a new instance of this class.
         
-        Returns a fully instantiated AboutPlauncherDialog object.
+        Returns a fully instantiated AboutGinfoTweaksDialog object.
         """
-        builder = get_builder('AboutPlauncherDialog')
-        new_object = builder.get_object("about_plauncher_dialog")
+        builder = get_builder('AboutGinfoTweaksDialog')
+        new_object = builder.get_object("about_ginfotweaks_dialog")
         new_object.finish_initializing(builder)
         return new_object
 
@@ -29,8 +29,8 @@ class AboutPlauncherDialog(gtk.AboutDialog):
         """Called while initializing this instance in __new__
 
         finish_initalizing should be called after parsing the ui definition
-        and creating a AboutPlauncherDialog object with it in order to
-        finish initializing the start of the new AboutPlauncherDialog
+        and creating a AboutGinfoTweaksDialog object with it in order to
+        finish initializing the start of the new AboutGinfoTweaksDialog
         instance.
         
         Put your initialization code in here and leave __init__ undefined.
@@ -43,6 +43,6 @@ class AboutPlauncherDialog(gtk.AboutDialog):
 
 
 if __name__ == "__main__":
-    dialog = AboutPlauncherDialog()
+    dialog = AboutGinfoTweaksDialog()
     dialog.show()
     gtk.main()

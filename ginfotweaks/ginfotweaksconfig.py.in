@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-# THIS IS Plauncher CONFIGURATION FILE
+# THIS IS GinfoTweaks CONFIGURATION FILE
 # YOU CAN PUT THERE SOME GLOBAL VALUE
 # Do not touch unless you know what you're doing.
 # you're warned :)
@@ -18,15 +18,15 @@ import sys, os
 
 # Where your project will look for your data (for instance, images and ui
 # files). By default, this is ../data, relative your trunk layout
-__plauncher_data_directory__ = os.path.join('@prefix@', 'share' , \
-        'plauncher','data')
+__ginfotweaks_data_directory__ = os.path.join('@prefix@', 'share' , \
+        'ginfotweaks','data')
 __license__ = ''
 
 import os
 
 import gettext
 from gettext import gettext as _
-gettext.textdomain('plauncher')
+gettext.textdomain('ginfotweaks')
 
 class project_path_not_found(Exception):
     """Raised when we can't find the project directory."""
@@ -43,16 +43,16 @@ def get_data_file(*path_segments):
 
 
 def get_data_path():
-    """Retrieve plauncher data path
+    """Retrieve ginfotweaks data path
 
-    This path is by default <plauncher_lib_path>/../data/ in trunk
-    and /usr/share/plauncher in an installed version but this path
+    This path is by default <ginfotweaks_lib_path>/../data/ in trunk
+    and /usr/share/ginfotweaks in an installed version but this path
     is specified at installation time.
     """
 
     # Get pathname absolute or relative.
     path = os.path.join(
-        os.path.dirname('@prefix@'), __plauncher_data_directory__)
+        os.path.dirname('@prefix@'), __ginfotweaks_data_directory__)
 
     abs_data_path = os.path.abspath(path)
     if not os.path.exists(abs_data_path):

@@ -1,0 +1,9 @@
+<glade-catalog name="about_ginfotweaks_dialog" domain="glade-3" 
+               depends="gtk+" version="1.0">
+  <glade-widget-classes>
+    <glade-widget-class title="About GinfoTweaks Dialog" name="AboutGinfoTweaksDialog" 
+                        generic-name="AboutGinfoTweaksDialog" parent="GtkAboutDialog"
+                        icon-name="widget-gtk-about-dialog"/>
+  </glade-widget-classes>
+
+</glade-catalog>

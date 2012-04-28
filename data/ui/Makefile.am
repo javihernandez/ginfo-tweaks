@@ -1,8 +1,8 @@
-plauncherdatadir = $(datadir)/$(PACKAGE)/data/ui
-plauncherdata_DATA = \
-        AboutPlauncherDialog.ui \
+ginfotweaksdatadir = $(datadir)/$(PACKAGE)/data/ui
+ginfotweaksdata_DATA = \
+        AboutGinfoTweaksDialog.ui \
         LauncherEntry.ui \
-        PlauncherWindow.ui \
-        PreferencesPlauncherDialog.ui
+        GinfoTweaksWindow.ui \
+        PreferencesGinfoTweaksDialog.ui
 
-EXTRA_DIST = $(plauncherdata_DATA)
+EXTRA_DIST = $(ginfotweaksdata_DATA)
